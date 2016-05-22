@@ -1,5 +1,5 @@
 ---
-title: "Forecasting Gold Prices"
+title: "Modeling and Forecasting Gold Prices"
 author: "Dário Soares, Francisco Lourenço, Hugo Ricardo, Ricardo Mendes"
 date: "June 5, 2016"
 output: html_document
@@ -104,15 +104,13 @@ plot(log(gold.ts))
 
 ## ... (other)
 
-## Intervention Analysis
-
-The case of the Yuan
+# Cross correlations
 
 ```{r, echo=TRUE}
 
 ```
 
-## Cross correlations
+# Intervention Analysis
 
 ```{r, echo=TRUE}
 
