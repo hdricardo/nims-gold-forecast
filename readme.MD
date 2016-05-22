@@ -17,3 +17,4 @@
 
 * report.Rmd: code that generates the output file (needs RStudio and Knitr)
 * report.html: latest output file
+* preview: http://htmlpreview.github.io/?https://github.com/ddbs/nims-gold-forecast/blob/master/report.html
