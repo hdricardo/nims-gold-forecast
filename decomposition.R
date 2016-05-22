@@ -80,9 +80,6 @@ trModel <- lm(gold.ts ~ c(1:length(gold.ts)))
 plot(resid(trModel), type="l")  # resid(trModel) contains the de-trended series.
 
 
-## HP Filter
-# https://ionides.github.io/531w16/midterm_project/project1/Stats_531_Midterm_Project.html
-
 
 
 ################################################################################
