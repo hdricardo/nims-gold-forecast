@@ -1,0 +1,124 @@
+---
+title: "Forecasting Gold Prices"
+author: "Dário Soares, Francisco Lourenço, Hugo Ricardo, Ricardo Mendes"
+date: "June 5, 2016"
+output: html_document
+---
+
+```{r, echo=TRUE}
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+library(forecast)
+library(fpp)
+```
+
+# Introduction
+
+# Data
+
+```{r, echo=TRUE}
+# load data, jan 2004
+gold <- read.csv("gold2004month.txt", header=F)
+
+# Set as time series
+gold.ts <- ts(gold[,1], freq=12)
+
+```
+
+# Stationarity
+
+```{r, echo=TRUE}
+## Data transformations - THIS WILL BE CHANGED IN THE FINAL REPORT
+
+# First differences
+gold.dif <- diff(gold.ts)
+
+# Log
+gold.log <- log(gold.ts)
+
+# First differences of log
+gold.dif.log <- diff(gold.log)
+
+# Box-Cox Transformation
+lambda <- BoxCox.lambda(gold.ts)
+gold.bct <- ((gold.ts^lambda)-1)/lambda
+gold.dif.bct <- diff(gold.bct)
+
+# set dataset for next studies
+gold.trans <- gold.dif.bct
+```
+
+
+```{r, echo=TRUE}
+# gold prices and log(prices)
+par(mfrow=c(1,2))
+plot(gold.ts)
+plot(log(gold.ts))
+```
+
+
+# Decomposition
+
+```{r, echo=TRUE}
+
+```
+
+
+
+## Seasonality
+
+```{r, echo=TRUE}
+
+```
+
+
+## Trend
+
+```{r, echo=TRUE}
+
+```
+
+
+## Cycles
+
+```{r, echo=TRUE}
+
+```
+
+
+# Models
+
+```{r, echo=TRUE}
+
+```
+
+
+## ARIMA and Seasonal ARIMA
+
+```{r, echo=TRUE}
+
+```
+
+## ... (other)
+
+## Intervention Analysis
+
+The case of the Yuan
+
+```{r, echo=TRUE}
+
+```
+
+## Cross correlations
+
+```{r, echo=TRUE}
+
+```
+
+
+# Discussion
+
+# References
