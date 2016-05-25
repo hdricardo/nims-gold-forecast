@@ -1,5 +1,5 @@
 source("load.R")
-data <- gold.trans
+data <- diff(log(gold.ts))
 par(mfrow=c(1,1))
 
 # OBJECTIVE: find best ARIMA and SEASONAL ARIMA models
@@ -10,14 +10,14 @@ par(mfrow=c(1,1))
 
 # look into ACF/PACF
 par(mfrow=c(1,2))
-acf(data)
-pacf(data)
-acf(data, lag.max=200)
-pacf(data, lag.max=200)
+Acf(data)
+Pacf(data)
+Acf(data, lag.max=200)
+Pacf(data, lag.max=200)
 
 # run autoarima
 auto.arima(data)
-# output: arima(0,0,1)
+# output: arima(0,0,1) with non-zero mean
 
 # test some ad-hoc models
 arima(data,c(0,0,1))
@@ -28,14 +28,21 @@ arima(data,c(1,0,6))
 arima(data,c(0,0,5))
 # none of them has significance
 
-# best fit (residuals analysis?)
-par(mfrow=c(1,2))
-fit <- arima(data, order=c(0,0,1))
+# best fit + residuals analysis
+fit <- Arima(gold.trans, order=c(0,0,1), include.mean = T)
 fit
-#tsdiag(fit)
 qqnorm(residuals(fit))
 qqline(residuals(fit))
-acf(residuals(fit), lag.max=200)
+Acf(residuals(fit), lag.max=30)
+# less than 5% of obervations are within bounds?
+
+# test if residuals are white noise: 
+# p-value > 0.05 is desirable
+res <- residuals(fit)
+Box.test(res, lag=10, fitdf=0 )
+Box.test(res, lag=10,fitdf=0, type="Lj")
+Box.test(res, lag=21,fitdf=0, type="Lj") #oops
+
 
 # parameters are insignificant. Why?
 # http://stats.stackexchange.com/questions/176704/arima2-1-3-insignificant-coefficients

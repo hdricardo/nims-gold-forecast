@@ -5,8 +5,7 @@ date: "June 5, 2016"
 output: html_document
 ---
 
-```{r, echo=TRUE}
-
+```{r, echo=FALSE, message=FALSE}
 ```
 
 
@@ -31,6 +30,10 @@ gold.ts <- ts(gold[,1], freq=12)
 # Stationarity
 
 ```{r, echo=TRUE}
+
+# plot correlations
+lag.plot(gold.ts, lags=9, do.lines=F)
+
 ## Data transformations - THIS WILL BE CHANGED IN THE FINAL REPORT
 
 # First differences
@@ -49,6 +52,7 @@ gold.dif.bct <- diff(gold.bct)
 
 # set dataset for next studies
 gold.trans <- gold.dif.bct
+
 ```
 
 
@@ -102,7 +106,12 @@ plot(log(gold.ts))
 
 ```
 
-## ... (other)
+## ARCH-GARCH
+
+```{r, echo=TRUE}
+source("variance.R")
+
+```
 
 # Cross correlations
 

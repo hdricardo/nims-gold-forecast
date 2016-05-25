@@ -12,6 +12,9 @@ par(mfrow=c(1,2))
 plot(gold.ts)
 plot(log(gold.ts))
 
+# view multiple lags
+lag.plot(gold.ts, lags=9, do.lines=F)
+
 # first differences and first differences of log
 par(mfrow=c(1,2))
 plot(gold.dif)
@@ -51,3 +54,22 @@ adf.test(gold.trans)
 tsoutliers(gold.ts)
 tsoutliers(gold.dif)
 tsoutliers(gold.trans)
+
+
+################################################################################
+# SEASONALITY
+################################################################################
+
+# acf plot: for monthly data we should see a spike at month 12
+Acf(gold.trans)
+# there is a spike at month 6: meaning?
+
+# seasonal plot 
+seasonplot(gold.trans)
+
+# month plot
+monthplot(gold.trans)
+
+# monthly boxplot
+boxplot(gold.trans ~ cycle(gold.trans))
+
