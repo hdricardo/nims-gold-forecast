@@ -61,6 +61,6 @@ Acf(res, lag.max = 30)
 Pacf(res)  #???
 
 Box.test(res, lag=12, fitdf=0 )
-Box.test(res, lag=12,fitdf=0, type="Lj")
+Box.test(res, lag=12, fitdf=0, type="Lj")
 
 

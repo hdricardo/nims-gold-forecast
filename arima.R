@@ -46,7 +46,7 @@ Box.test(res, lag=21,fitdf=0, type="Lj") #oops
 
 # parameters are insignificant. Why?
 # http://stats.stackexchange.com/questions/176704/arima2-1-3-insignificant-coefficients
-
+# http://stats.stackexchange.com/questions/109412/getting-residuals-to-be-white-noise
 
 ################################################################################
 # SEASONAL ARIMA
@@ -60,4 +60,57 @@ ndiffs(data)
 ## output = 0 ???? meaning?
 
 ## TODO: test seasonal arima models
+
+
+################################################################################
+# LOOPS
+################################################################################
+
+cat("\014") # clear console
+
+x <- diff(sqrt(gold.ts))
+  
+par.p <- c(0,1,2)
+par.q <- c(0,1,2)
+
+par.P <- c(0,1,2)
+par.D <- c(0,1)
+par.Q <- c(0,1,2)
+
+# non-seasonal ARIMA
+p <- 0
+q <- 0
+d <- 0
+for (p in par.p) {
+  for (q in par.q) {
+    fit <- Arima(x, order=c(p,0,q))
+    summary(fit)
+    cat('\n')
+    cat('\n')
+    cat('\n')
+  }
+}
+
+# seasonal ARIMA
+P <- 0
+Q <- 0
+D <- 0
+for (p in par.p) {
+  for (q in par.q) {
+    for (Q in par.P) {
+      for (P in par.P) {
+        for (D in par.D) {
+          fit <- Arima(x, order=c(p,d,q), seasonal=list(order=c(P, D, Q), period=12), method="CSS")
+          summary(fit)
+          cat('\n')
+          cat('\n')
+          cat('\n')
+          res <- residuals(fit)
+          s <- paste(p,d,q,";", P, D, Q)
+          tsdisplay(res, main = s) 
+        }
+      }
+    }
+  }
+}
 
