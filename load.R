@@ -10,7 +10,7 @@ library(fpp)
 gold <- read.csv("gold2004month.txt", header=F)
 
 # Set as time series
-gold.ts <- ts(gold[,1], freq=12)
+gold.ts <- ts(gold[,1], freq=12, start=c(2004,1), end=c(2015,12))
 
 # checking if the data is consistent 1
 g <- read.csv("project_gold_lbma_monthly.txt", skip=4, header=F, sep=",")
@@ -49,7 +49,7 @@ gold.trans <- gold.dif.bct
 # LAMBDA TESTS
 ################################################################################
 
-lambda <- -2
+lambda <- 0.1
 x <- ((gold.ts^lambda)-1)/lambda
 plot(x)
 Acf(x)

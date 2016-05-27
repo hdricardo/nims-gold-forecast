@@ -1,6 +1,8 @@
 source("load.R")
+
 data <- diff(log(gold.ts))
 par(mfrow=c(1,1))
+
 
 # OBJECTIVE: find best ARIMA and SEASONAL ARIMA models
 
@@ -26,10 +28,11 @@ arima(data,c(1,0,1))
 arima(data,c(0,0,6))
 arima(data,c(1,0,6))
 arima(data,c(0,0,5))
+arima(data,c(0,0,6))
 # none of them has significance
 
 # best fit + residuals analysis
-fit <- Arima(gold.trans, order=c(0,0,1), include.mean = T)
+fit <- Arima(gold.trans, order=c(0,0,), include.mean = T)
 fit
 qqnorm(residuals(fit))
 qqline(residuals(fit))
@@ -69,10 +72,10 @@ ndiffs(data)
 cat("\014") # clear console
 
 x <- diff(sqrt(gold.ts))
-  
+
+# set parameters range  
 par.p <- c(0,1,2)
 par.q <- c(0,1,2)
-
 par.P <- c(0,1,2)
 par.D <- c(0,1)
 par.Q <- c(0,1,2)
