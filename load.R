@@ -12,6 +12,7 @@ gold <- read.csv("gold2004month.txt", header=F)
 # Set as time series
 gold.ts <- ts(gold[,1], freq=12)
 
+#falta window()
 
 ################################################################################
 # TRANSFORM
